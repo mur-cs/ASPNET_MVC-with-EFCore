@@ -1,0 +1,40 @@
+﻿@model BookViewModel
+
+<div style="display: flex; align-items: flex-start;">
+    <div style="margin-right: 20px;">
+        @{
+            string path = Url.Content($"~/images/{Model.Book.Id}.jpg");
+        }
+        <img src="@path" alt="@Model.Book.Title" style="max-width: 200px; height: auto;" />
+        
+    </div>
+    <div>
+        <h2>@Model.Book.Title</h2>
+        <p><strong>Автор:</strong> @Model.Book.Author</p>
+        <p><strong>Жанр:</strong> @Model.Book.Genre</p>
+        <p><strong>Відгуки:</strong></p>
+
+        @if (Model.Reviews != null && Model.Reviews.Any())
+        {
+            <ul>
+                @foreach (var review in Model.Reviews)
+                {
+                    <li>
+                        <strong>Оцінка:</strong> @review.Rating <br />
+                        <strong>Відгук:</strong> @review.Text
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Відгуків немає.</p>
+        }
+    </div>
+</div>
+
+<div style="margin-top:30px">
+    <a class="btn btn-primary" asp-controller="Home" asp-action="AddReview" asp-route-Id="@Model.Book.Id">Відправити відгук</a>
+</div>
+
+

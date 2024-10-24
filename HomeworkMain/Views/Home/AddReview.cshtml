@@ -1,0 +1,23 @@
+﻿@model BookViewModel
+
+<h3>Написати відгук</h3>
+<form asp-action="AddReview" asp-controller="Home" asp-route-BookId="@Model.Book.Id" method="post">
+
+    <div>
+        <label asp-for="Rating">Оцінка:</label>
+        <select asp-for="Rating" required>
+            <option value="">Оберіть оцінку</option>
+            @for (int i = 1; i <= 5; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="ReviewText">Відгук:</label>
+        <textarea asp-for="ReviewText" rows="4" required></textarea>
+    </div>
+
+    <button type="submit">Відправити відгук</button>
+</form>
